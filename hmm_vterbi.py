@@ -1,21 +1,3 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
-    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
-</head>
-<body>
-    <py-env>
-        - numpy
-        - paths:
-            - /traindata.txt
-      </py-env>
-    <py-script>
 import numpy as np
 
 class HMM():
@@ -28,6 +10,7 @@ class HMM():
         self.A = None    #初始矩阵
         self.B = None   #转移矩阵
         self.C = None   #发射矩阵
+
 
     def train(self, file):
         #将矩阵初始化
@@ -136,13 +119,3 @@ if __name__ == '__main__' :
     print(sentence)
     tags = HMM.viterbi(sentence)
     print(tags)
-
-    </py-script>
-    <div>
-        <input id="new-task-content" class="py-input" type="text">
-        <button id="new-task-btn" class="py-button" type="submit" py-click="add_task()">
-          RUN
-        </button>
-    </div>
-</body>
-</html>

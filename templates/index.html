@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HMM词性标注</title>
+</head>
+<body>
+    <form method="post">  <!-- 指定提交方法为 POST -->
+        <label for="name">请输入句子：</label>
+        <input type="text" name="sentence" id="sentence"><br>  <!-- 文本输入框 -->
+        <input type="submit" name="submit" value="确定">  <!-- 提交按钮 -->
+    </form>
+    <table border = 1>
+        {% for i in range(length) %}
+           <tr>
+              <th> {{ words[i] }} </th>
+              <td> {{ tags[i] }} </td>
+           </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
