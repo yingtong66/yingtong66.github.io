@@ -1,3 +1,23 @@
+<<<<<<< HEAD:hmm_vterbi.py
+=======
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+</head>
+<body>
+    <py-config type="toml">
+        packages = ["numpy"]
+        paths = ["./traindata.txt"]
+    </py-config>
+    <py-script>
+>>>>>>> c4dc63751573b3509d6c13f16d78e0e43c500ee2:HMM/hmm.html
 import numpy as np
 
 class HMM():
@@ -119,3 +139,16 @@ if __name__ == '__main__' :
     print(sentence)
     tags = HMM.viterbi(sentence)
     print(tags)
+<<<<<<< HEAD:hmm_vterbi.py
+=======
+
+    </py-script>
+    <div>
+        <input id="new-task-content" class="py-input" type="text">
+        <button id="new-task-btn" class="py-button" type="submit" py-click="add_task()">
+          RUN
+        </button>
+    </div>
+</body>
+</html>
+>>>>>>> c4dc63751573b3509d6c13f16d78e0e43c500ee2:HMM/hmm.html
