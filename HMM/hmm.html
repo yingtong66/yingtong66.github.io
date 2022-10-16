@@ -10,11 +10,10 @@
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
 <body>
-    <py-env>
-        - numpy
-        - paths:
-            - /traindata.txt
-      </py-env>
+    <py-config type="toml">
+        packages = ["numpy"]
+        paths = ["./traindata.txt"]
+    </py-config>
     <py-script>
 import numpy as np
 
