@@ -1,0 +1,118 @@
+/* 页面整体 */
+body {
+    margin: auto;
+    max-width: 800px;
+    font-size: 14px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+/* 页脚 */
+footer {
+    color: #888;
+    margin-top: 15px;
+    text-align: center;
+    padding: 10px;
+}
+
+/* 头像 */
+.Lyt {
+    width: 40px;
+}
+
+/* 导航栏 */
+nav{
+    background-color: black;
+    height:40px;
+}
+
+
+div[id=title]{
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #000;
+    margin:20px;
+}
+textarea{
+    margin-bottom: unset;
+    font-size: 17px;
+    color: #00000040;
+    background-color: #f8f8f8;
+    border: 1px solid #d9d9d9;
+    margin-top: 10px;
+    width: 100%;
+    min-height: 200px;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.box {
+    margin-top: 10px;
+    margin-bottom: 180px;
+    width: 100%;
+    min-height: 200px;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+.result-list{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 180px;
+    width: 100%;
+    padding: 18px 20px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    flex-flow: wrap;
+}
+.result-list>div:first-child {
+    border: none;
+    background-color: unset;
+    color: #000;
+}
+.result-list>div{
+    padding: 4px;
+    margin: 0 12px 12px 0;
+    line-height: 35px;
+    font-size: 17px;
+    text-align: center;
+    color: #000000a6;
+    background-color: #d1def5;
+    border: 1px solid #347dff;
+    border-radius: 5px;
+}
+
+.tag{
+    font-size: 18px;
+    color: #4a90e2;
+    text-align: center;
+    border-top: 1px solid #fff;
+}
+.result-list>div:first-child>div {
+    font-size: 16px;
+    color: #000;
+    border-top: 1px solid #000;
+}
+input[type=submit] {
+    /* 文字颜色 */
+    color: #0099CC!important; 
+    /* 清除背景色 */
+    background: transparent; 
+    /* 边框样式、颜色、宽度 */
+    border: 2px solid #0099CC!important;
+    /* 给边框添加圆角 */
+    border-radius: 6px; 
+    /* 字母转大写 */
+    border: none;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: uppercase;
+}

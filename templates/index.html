@@ -4,21 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     <title>HMM词性标注</title>
 </head>
 <body>
+    <h2>
+        <img alt="Lyt" class="Lyt" src="{{ url_for('static', filename='icon.jpg') }}">
+        HMM词性标注工具
+    </h2>
+    <nav style="height: 40px;background-color: black;">
+    </nav>
     <form method="post">  <!-- 指定提交方法为 POST -->
-        <label for="name">请输入句子：</label>
-        <input type="text" name="sentence" id="sentence"><br>  <!-- 文本输入框 -->
+        <div id="title">请输入句子：</div>
+        <textarea name="sentence" id="sentence">Today is a good day .</textarea>
         <input type="submit" name="submit" value="确定">  <!-- 提交按钮 -->
     </form>
-    <table border = 1>
+    {% if flag==1 %}
+    <div id="title">分析的结果：</div>
+    <div class="result-list">
+
+        
+        <div class="word">
+            word
+            <div class="tag">
+                tag
+            </div>
+        </div>
         {% for i in range(length) %}
-           <tr>
-              <th> {{ words[i] }} </th>
-              <td> {{ tags[i] }} </td>
-           </tr>
+        <div class="word">
+            {{ words[i] }}
+            <div class="tag">
+                {{ tags[i] }}
+            </div>
+        </div>
         {% endfor %}
-    </table>
+        {% endif %}
+        {% if flag==0 %}
+            <div id="title">包含生词，请换一个句子！</div>
+        {% endif %}
+
+    </div>
 </body>
 </html>

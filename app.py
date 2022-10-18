@@ -1,6 +1,7 @@
 from flask import Flask, render_template,request, url_for, redirect, flash
 import numpy as np
 import os
+from datetime import timedelta
 
 
 # class NameForm(FlaskForm):
@@ -10,6 +11,9 @@ import os
 app = Flask(__name__)#实例化flask类
 app.debug=True
 app.config["SECRET_KEY"]=os.urandom(24)
+# 设置静态文件缓存过期时间
+app.send_file_max_age_default = timedelta(seconds=1)
+
 class HMM():
     def __init__(self):
         #词典，将每个词性和单词都赋予id，便于查表
@@ -21,7 +25,6 @@ class HMM():
         self.B = None   #转移矩阵
         self.C = None   #发射矩阵
 
-
     def train(self, file):
         #将矩阵初始化
         for line in open(file, 'r', encoding='utf-8'):
@@ -31,11 +34,11 @@ class HMM():
             word, tag = line[0].lower(), line[1].rstrip()   #单词全部转为小写，tag去除换行符
             tag=tag.split("|")[0]   #标注了两个词性的话，取第一个
 
-            #合并相似功能的符号
-            if tag in [",", ".", ":", "``", "''"]:
-                tag="END"#特殊的符号，视作一句话的终止，tag标为空。
-            elif tag in ["$","#","SYM","(", ")"]:
-                tag="W"#句中符号，当做普通标点。
+            # #合并相似功能的符号
+            # if tag in [",", ".", ":", "``", "''"]:
+            #     tag="END"#特殊的符号，视作一句话的终止，tag标为空。
+            # elif tag in ["$","#","SYM","(", ")"]:
+            #     tag="W"#句中符号，当做普通标点。
 
             if word not in self.word2id:#建立单词词典
                 self.word2id[word] = len(self.word2id)
@@ -63,11 +66,11 @@ class HMM():
             word, tag = line[0].lower(), line[1].rstrip()
             tag = tag.split("|")[0]
 
-            #合并相似功能符号
-            if tag in [",", ".", ":", "``", "''"]:
-                tag="END"#特殊的符号，视作一句话的终止，tag标为空。
-            elif tag in ["$","#","SYM","(", ")"]:
-                tag="W"#句中符号，当做普通标点。
+            # #合并相似功能符号
+            # if tag in [",", ".", ":", "``", "''"]:
+            #     tag="END"#特殊的符号，视作一句话的终止，tag标为空。
+            # elif tag in ["$","#","SYM","(", ")"]:
+            #     tag="W"#句中符号，当做普通标点。
 
             word_id, tag_id = self.word2id[word], self.tag2id[tag]#获取当前单词和词性
 
@@ -87,8 +90,15 @@ class HMM():
             self.C[i] /= sum(self.C[i])
 
     def viterbi(self, sentence):
+        sentence=sentence.strip()
         print(sentence)
-        words = [self.word2id[word.lower()] for word in sentence.split(" ")]#将单词转换为ID
+        words=[]
+        for word in sentence.split(" "):
+            if word.lower() in self.word2id:
+                words.append(self.word2id[word.lower()])
+            else:
+                return False #包含生词 无法识别
+        #words = [self.word2id[word.lower()] for word in sentence.split(" ")]
         length = len(words)
 
         dp = np.zeros((length, self.tagNum))#存储分数，行数=句子长度，列数=词性
@@ -98,6 +108,7 @@ class HMM():
         for j in range(self.tagNum):#遍历词性
             dp[0][j] = self.A[j]*self.C[j][words[0]]#发射矩阵x转移矩阵
         #第二个单词起
+        #i是单词
         for i in range(1, length):
             # j为当前层的词性
             for j in range(self.tagNum):
@@ -132,9 +143,13 @@ def result():
         hmm = HMM()
         hmm.train('traindata.txt')
         tags = hmm.viterbi(sentence)
-        return render_template('index.html',tags=tags,words=sentence.split(" "),length=len(tags))
-    return render_template('index.html',tags=[],words=[],length=0)
-    
+        if tags==False:
+            print(0)
+            return render_template('index.html',tags=[],words=[],length=0,flag=0)#有生词
+        print(tags)
+        return render_template('index.html',tags=tags,words=sentence.split(" "),length=len(tags),flag=1)#正常返回
+    print(2)
+    return render_template('index.html',tags=[],words=[],length=0,flag=2)
 
 
 
